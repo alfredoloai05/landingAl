@@ -1,0 +1,18 @@
+/* ── Divider ── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--card-bd), transparent);
+  margin: 0 clamp(1.5rem, 5vw, 5rem);
+}
+
+/* ── Fade-in animations ── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

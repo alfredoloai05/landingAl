@@ -1,0 +1,75 @@
+/* ── Services ── */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+.service-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--card-bg);
+  border: 1px solid var(--card-bd);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  cursor: default;
+}
+
+.service-card::before,
+.project-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(24,214,255,0.13), transparent 34%),
+    linear-gradient(120deg, transparent 28%, rgba(255,255,255,0.07), transparent 46%);
+  opacity: 0;
+  transform: translateX(-18%);
+  transition: opacity 0.35s, transform 0.55s;
+  pointer-events: none;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(10,132,255,0.3);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 30px rgba(10,132,255,0.08);
+}
+
+.service-card:hover::before,
+.project-card:hover::before {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.service-card:hover .service-icon-wrap {
+  transform: translateY(-2px) rotate(-3deg);
+  box-shadow: 0 0 24px rgba(24,214,255,0.18);
+}
+
+.service-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(10,132,255,0.15), rgba(24,214,255,0.08));
+  border: 1px solid rgba(10,132,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  color: var(--cyan);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.service-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  color: var(--white);
+}
+
+.service-desc {
+  font-size: 0.875rem;
+  color: var(--gray);
+  line-height: 1.65;
+}

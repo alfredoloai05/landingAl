@@ -1,0 +1,28 @@
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-visual { height: 340px; }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-visual { height: 280px; }
+  .process-row { grid-template-columns: 1fr 1fr; }
+  .process-track { display: none; }
+  .nav-links, .navbar > .btn-primary { display: none; }
+  .mobile-toggle { display: flex; }
+  .footer { flex-direction: column; align-items: flex-start; }
+  .tag-slot-1 { top: 5%; right: 4%; }
+  .tag-slot-2 { top: 25%; left: 2%; }
+  .tag-slot-3 { bottom: 22%; left: 2%; }
+  .tag-slot-4 { bottom: 8%; right: 7%; }
+  .tag-slot-5 { top: 48%; right: 1%; }
+}
+
+@media (min-width: 900px) {
+  .mobile-toggle { display: none !important; }
+}
+
+@media (max-width: 600px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .process-row { grid-template-columns: 1fr; }
+  .hero-btns { flex-direction: column; }
+}

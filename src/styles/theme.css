@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:       #06111F;
+  --deep:     #062B5F;
+  --blue:     #0A84FF;
+  --cyan:     #18D6FF;
+  --white:    #F5F9FF;
+  --gray:     #6B7A90;
+  --card-bg:  rgba(255,255,255,0.04);
+  --card-bd:  rgba(255,255,255,0.08);
+}
+
+html { scroll-behavior: smooth; }
+section { scroll-margin-top: 86px; }
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(24,214,255,0.55) rgba(6,17,31,0.95);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(6,17,31,0.96);
+  border-left: 1px solid rgba(255,255,255,0.04);
+}
+
+::-webkit-scrollbar-thumb {
+  background:
+    linear-gradient(180deg, rgba(10,132,255,0.95), rgba(24,214,255,0.82));
+  border: 2px solid rgba(6,17,31,0.96);
+  border-radius: 999px;
+  box-shadow: 0 0 16px rgba(24,214,255,0.32);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background:
+    linear-gradient(180deg, rgba(24,214,255,1), rgba(10,132,255,0.95));
+}
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  text-decoration: none;
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Sora', sans-serif;
+}
+
+/* ── Particles canvas background ── */
+#particles-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+}
