@@ -4,11 +4,11 @@ import { useFadeUp } from "../../hooks/useFadeUp";
 export default function About() {
   const ref = useFadeUp();
   const points = [
-    "Desarrollo moderno y escalable",
+    "Sistemas internos y automatizaciones",
+    "Dashboards, reportería e integración de datos",
+    "Aplicaciones web operativas y mantenibles",
+    "IA aplicada y visión por computadora",
     "Comunicación clara durante todo el proceso",
-    "Enfoque en resultados de negocio",
-    "Diseño responsive y experiencia de usuario",
-    "Código limpio y mantenible",
   ];
 
   return (
@@ -17,9 +17,9 @@ export default function About() {
         <div className="about-grid">
           <div ref={ref} className="fade-up">
             <span className="section-eyebrow">Sobre AL</span>
-            <h2 className="section-title">Desarrolladores full stack enfocados en construir soluciones que se sostienen</h2>
+            <h2 className="section-title">Una marca de desarrollo enfocada en sistemas útiles, mantenibles y listos para crecer</h2>
             <p style={{ color: "var(--gray)", fontSize: "0.95rem", lineHeight: 1.75, marginTop: "1rem", maxWidth: "480px" }}>
-              Combinamos estrategia, diseño limpio y código de calidad para construir productos digitales que generan impacto real. Nuestro enfoque está en crear soluciones funcionales, escalables y fáciles de usar.
+              AL Soluciones Tecnológicas es una marca de desarrollo de software liderada por Alfredo Loaiza, enfocada en construir sistemas internos, automatizaciones y plataformas digitales a medida para negocios reales.
             </p>
             <ul className="about-points">
               {points.map(p => (

@@ -41,11 +41,13 @@ export default function Hero() {
         <div ref={ref} className="fade-up">
           <span className="hero-eyebrow">Soluciones Tecnológicas</span>
           <h1 className="hero-title">
-            Tecnología que convierte ideas en{" "}
-            <span className="gradient-text">soluciones reales.</span>
+            Software a medida para negocios que quieren{" "}
+            <span className="gradient-text">operar mejor.</span>
           </h1>
           <p className="hero-sub">
-            Somos desarrolladores full stack: convertimos ideas, procesos y herramientas en productos digitales sólidos, medibles y listos para crecer.
+            En AL desarrollamos sistemas internos, automatizaciones, dashboards,
+            integraciones y plataformas web para negocios que necesitan operar
+            mejor, ahorrar tiempo y tomar decisiones con datos.
           </p>
           <div className="hero-btns">
             <a href="#contacto" className="btn-primary">Cotizar mi proyecto <ArrowRight size={15} /></a>

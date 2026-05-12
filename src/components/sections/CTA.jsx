@@ -20,10 +20,10 @@ export default function CTA() {
         <div ref={ref} className="fade-up cta-inner">
           <span className="section-eyebrow">Contacto</span>
           <h2 className="cta-title">
-            Cuéntanos tu idea y hagámosla <span className="gradient-text">realidad</span>
+            Hablemos del proceso que quieres <span className="gradient-text">ordenar</span>
           </h2>
           <p className="cta-sub">
-            Estamos listos para ayudarte a llevar tu proyecto al siguiente nivel.
+            Podemos convertir una operación manual, una idea de plataforma o un flujo de datos desordenado en una solución clara y mantenible.
           </p>
           <div className="cta-btns">
             <a

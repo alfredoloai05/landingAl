@@ -1,6 +1,13 @@
 import { Github, Instagram, Linkedin } from "lucide-react";
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+  const socialItems = [
+    { label: "GitHub próximamente", icon: Github },
+    { label: "LinkedIn próximamente", icon: Linkedin },
+    { label: "Instagram próximamente", icon: Instagram },
+  ];
+
   return (
     <footer style={{ borderTop: "1px solid var(--card-bd)" }}>
       <div className="footer">
@@ -16,11 +23,13 @@ export default function Footer() {
           ))}
         </ul>
         <div className="footer-social">
-          <a href="#" aria-label="GitHub"><Github size={18} /></a>
-          <a href="#" aria-label="LinkedIn"><Linkedin size={18} /></a>
-          <a href="#" aria-label="Instagram"><Instagram size={18} /></a>
+          {socialItems.map(({ label, icon: Icon }) => (
+            <button key={label} type="button" aria-label={label} title="Próximamente" disabled>
+              <Icon size={18} />
+            </button>
+          ))}
         </div>
-        <span className="footer-copy">© 2025 AL Soluciones Tecnológicas. Todos los derechos reservados.</span>
+        <span className="footer-copy">© {currentYear} AL Soluciones Tecnológicas. Todos los derechos reservados.</span>
       </div>
     </footer>
   );

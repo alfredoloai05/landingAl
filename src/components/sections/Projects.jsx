@@ -5,27 +5,43 @@ export default function Projects() {
   const ref = useFadeUp();
   const projects = [
     {
-      cat: "Dashboard & Analytics",
-      title: "Panel Administrativo Empresarial",
-      desc: "Sistema centralizado de gestión con visualización de métricas, reportes en tiempo real y control de operaciones.",
-      result: "+60% eficiencia operativa",
+      cat: "Automatización empresarial",
+      title: "Sistema de reportería y control operativo para RIOSAC",
+      desc: "Solución interna para automatizar la descarga, limpieza, consolidación y comparación de información operativa, reduciendo procesos manuales y centralizando reportes clave para la toma de decisiones.",
+      result: "Automatización de reportería y control interno",
       colors: ["#0A84FF", "#062B5F", "#18D6FF"],
       icon: "dashboard",
     },
     {
-      cat: "Marketing Digital",
-      title: "Landing Page de Alta Conversión",
-      desc: "Página de captación optimizada para SEO, velocidad de carga y experiencia de usuario orientada a resultados.",
-      result: "+40% más consultas",
+      cat: "Desarrollo web",
+      title: "Solución digital para Saizna",
+      desc: "Diseño y desarrollo de una plataforma web orientada a presentar servicios, mejorar la presencia digital y facilitar el contacto con clientes potenciales.",
+      result: "Presencia digital profesional",
       colors: ["#18D6FF", "#0A84FF", "#06111F"],
       icon: "landing",
     },
     {
-      cat: "Gestión Interna",
-      title: "Sistema de Reservas y Gestión",
-      desc: "Plataforma personalizada para gestión de citas, inventario y seguimiento de clientes con notificaciones automáticas.",
-      result: "Procesos 3x más rápidos",
+      cat: "Sistema operativo",
+      title: "Plataforma web para gestión de gasolinera",
+      desc: "Aplicación web en React pensada para controlar operaciones de caja, turnos, administración, ventas y monitoreo de dispensadores, con arquitectura preparada para integración con APIs externas.",
+      result: "Prototipo funcional de gestión operativa",
       colors: ["#062B5F", "#0A84FF", "#18D6FF"],
+      icon: "system",
+    },
+    {
+      cat: "Inteligencia artificial",
+      title: "Modelos híbridos para detección de enfermedades oculares",
+      desc: "Investigación y desarrollo de modelos basados en visión por computadora para comparar arquitecturas híbridas en la detección de retinopatía diabética y glaucoma usando datasets públicos.",
+      result: "IA aplicada a análisis de imágenes médicas",
+      colors: ["#0A84FF", "#18D6FF", "#062B5F"],
+      icon: "dashboard",
+    },
+    {
+      cat: "Computer Vision",
+      title: "Sistema de conteo de personas",
+      desc: "Solución basada en visión por computadora para detectar y contabilizar personas en espacios físicos, útil para control de aforo, análisis de flujo y monitoreo operativo.",
+      result: "Analítica visual automatizada",
+      colors: ["#18D6FF", "#062B5F", "#0A84FF"],
       icon: "system",
     },
   ];
@@ -35,8 +51,8 @@ export default function Projects() {
       <div className="section-inner">
         <div ref={ref} className="fade-up">
           <span className="section-eyebrow">Proyectos</span>
-          <h2 className="section-title">Resultados que<br />hablan por sí solos</h2>
-          <p className="section-sub">Casos de uso que demuestran el impacto de soluciones bien construidas.</p>
+          <h2 className="section-title">Proyectos reales.<br />Soluciones aplicadas.</h2>
+          <p className="section-sub">Experiencia desarrollando sistemas internos, automatizaciones, plataformas web e inteligencia artificial aplicada a problemas reales.</p>
         </div>
         <div className="projects-grid">
           {projects.map((p, i) => <ProjectCard key={p.title} {...p} delay={i * 80} />)}

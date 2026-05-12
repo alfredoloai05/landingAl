@@ -44,13 +44,15 @@
   gap: 1rem;
 }
 
-.footer-social a {
+.footer-social button {
+  background: transparent;
+  border: 0;
   color: var(--gray);
-  transition: color 0.2s;
+  cursor: not-allowed;
   display: flex;
+  opacity: 0.55;
+  padding: 0;
 }
-
-.footer-social a:hover { color: var(--cyan); }
 
 .footer-copy {
   font-size: 0.75rem;

@@ -1,15 +1,39 @@
-import { Code2, Globe, Layout, LifeBuoy, Plug, Zap } from "lucide-react";
+import { CheckCircle, Code2, Globe, Layout, Plug, Zap } from "lucide-react";
 import { useFadeUp } from "../../hooks/useFadeUp";
 
 export default function Services() {
   const ref = useFadeUp();
   const items = [
-    { icon: <Globe size={22} />, title: "Desarrollo Web", desc: "Sitios web modernos, rápidos, responsivos y optimizados para convertir." },
-    { icon: <Code2 size={22} />, title: "Aplicaciones a Medida", desc: "Software personalizado para resolver necesidades específicas de tu negocio." },
-    { icon: <Zap size={22} />, title: "Automatizaciones", desc: "Flujos inteligentes que ahorran tiempo y reducen tareas repetitivas." },
-    { icon: <Plug size={22} />, title: "Integraciones", desc: "Conexión entre herramientas, APIs, sistemas internos y plataformas digitales." },
-    { icon: <Layout size={22} />, title: "UI/UX & Prototipos", desc: "Diseños claros, funcionales y centrados en la experiencia del usuario." },
-    { icon: <LifeBuoy size={22} />, title: "Soporte y Escalabilidad", desc: "Mejoras, mantenimiento y evolución continua de tus soluciones digitales." },
+    {
+      icon: <Code2 size={22} />,
+      title: "Sistemas internos a medida",
+      desc: "Aplicaciones para administrar operaciones, usuarios, permisos, inventario, ventas, turnos y procesos específicos del negocio.",
+    },
+    {
+      icon: <Zap size={22} />,
+      title: "Automatización de procesos",
+      desc: "Soluciones para reducir tareas repetitivas, ordenar flujos de trabajo y disminuir dependencia de procesos manuales.",
+    },
+    {
+      icon: <Globe size={22} />,
+      title: "Dashboards y reportería",
+      desc: "Paneles, reportes y consolidación de información para visualizar datos clave y apoyar la toma de decisiones.",
+    },
+    {
+      icon: <Plug size={22} />,
+      title: "Integraciones y APIs",
+      desc: "Conexión entre sistemas, bases de datos, servicios externos, plataformas web y herramientas internas.",
+    },
+    {
+      icon: <Layout size={22} />,
+      title: "Desarrollo web profesional",
+      desc: "Landings, sitios corporativos y plataformas web modernas, rápidas, responsivas y orientadas a conversión.",
+    },
+    {
+      icon: <CheckCircle size={22} />,
+      title: "IA y visión por computadora",
+      desc: "Prototipos y soluciones con inteligencia artificial para análisis de imágenes, detección, conteo y clasificación.",
+    },
   ];
 
   return (
@@ -17,8 +41,8 @@ export default function Services() {
       <div className="section-inner">
         <div ref={ref} className="fade-up">
           <span className="section-eyebrow">Servicios</span>
-          <h2 className="section-title">Soluciones completas<br />para tu negocio</h2>
-          <p className="section-sub">Desde la idea hasta la implementación, te acompañamos en cada etapa del proceso.</p>
+          <h2 className="section-title">Software práctico<br />para procesos reales</h2>
+          <p className="section-sub">Creamos soluciones digitales para ordenar operaciones, conectar herramientas y convertir datos dispersos en información útil.</p>
         </div>
         <div className="services-grid">
           {items.map((s, i) => (
