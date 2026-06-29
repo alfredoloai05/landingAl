@@ -1,101 +1,80 @@
-import { useEffect, useState } from "react";
-import { ArrowRight, CheckCircle, Code2, Globe, Layout, LifeBuoy, Plug, Zap } from "lucide-react";
+import { ArrowRight, Braces, Check, Database, FileSpreadsheet, Sparkles } from "lucide-react";
 import { useFadeUp } from "../hooks/useFadeUp";
+import { whatsappHref } from "../config/contact";
 
 export default function Hero() {
   const ref = useFadeUp(0.05);
-  const [highlightIndex, setHighlightIndex] = useState(0);
-  const techs = ["Next.js", "React", "TypeScript", "Node.js", "APIs", "PostgreSQL"];
-  const heroTags = [
-    { icon: <div className="dot" />, text: "Disponible para proyectos" },
-    { icon: <Plug size={12} style={{ color: "var(--cyan)" }} />, text: "APIs e integraciones" },
-    { icon: <Zap size={12} style={{ color: "var(--cyan)" }} />, text: "Automatizaciones reales" },
-    { icon: <Globe size={12} style={{ color: "var(--cyan)" }} />, text: "Web apps completas" },
-    { icon: <Code2 size={12} style={{ color: "var(--cyan)" }} />, text: "Código limpio y escalable" },
-    { icon: <Layout size={12} style={{ color: "var(--cyan)" }} />, text: "Frontend cuidado" },
-    { icon: <LifeBuoy size={12} style={{ color: "var(--cyan)" }} />, text: "Backend mantenible" },
-    { icon: <CheckCircle size={12} style={{ color: "var(--cyan)" }} />, text: "Full stack de punta a punta" },
-  ];
-  const visiblePatterns = [
-    [0, 2, 4],
-    [1, 3],
-    [0],
-    [2, 3, 4],
-    [1, 4],
-    [0, 1, 3],
-  ];
-  const visibleSlots = visiblePatterns[highlightIndex % visiblePatterns.length];
-
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      setHighlightIndex(index => index + 1);
-    }, 1700);
-
-    return () => window.clearInterval(timer);
-  }, []);
 
   return (
     <section className="hero" id="inicio">
+      <div className="hero-orb hero-orb-one" />
+      <div className="hero-orb hero-orb-two" />
       <div className="hero-grid">
-        {/* Left */}
-        <div ref={ref} className="fade-up">
-          <span className="hero-eyebrow">Soluciones Tecnológicas</span>
+        <div ref={ref} className="fade-up hero-copy">
+          <span className="hero-eyebrow"><i /> Software studio · Ecuador / remoto</span>
           <h1 className="hero-title">
-            Software a medida para negocios que quieren{" "}
-            <span className="gradient-text">operar mejor.</span>
+            Software que pone tu operación <span className="accent-underline">en movimiento.</span>
           </h1>
           <p className="hero-sub">
-            En AL desarrollamos sistemas internos, automatizaciones, dashboards,
-            integraciones y plataformas web para negocios que necesitan operar
-            mejor, ahorrar tiempo y tomar decisiones con datos.
+            Diseñamos sistemas a medida, automatizaciones e inteligencia artificial para convertir procesos dispersos en operaciones claras, conectadas y escalables.
           </p>
           <div className="hero-btns">
-            <a href="#contacto" className="btn-primary">Cotizar mi proyecto <ArrowRight size={15} /></a>
-            <a href="#proyectos" className="btn-secondary">Ver proyectos</a>
+            <a href={whatsappHref} target="_blank" rel="noreferrer" className="btn-primary">
+              Cuéntanos tu proceso <ArrowRight size={17} />
+            </a>
           </div>
-          <div className="tech-strip">
-            <span className="tech-label">Stack</span>
-            {techs.map(t => <span key={t} className="tech-tag">{t}</span>)}
+          <div className="trust-row" aria-label="Nuestra forma de trabajar">
+            <span><Check size={14} /> Diagnóstico antes de construir</span>
+            <span><Check size={14} /> Entregas por etapas</span>
+            <span><Check size={14} /> Soporte directo</span>
           </div>
         </div>
 
-        {/* Right — Logo visual */}
-        <div className="hero-visual">
-          <div className="logo-3d-wrap">
-            <div className="logo-glow-ring-3" />
-            <div className="logo-glow-ring-2" />
-            <div className="logo-glow-ring" />
-
-            {/* Orbits */}
-            <div className="orbit-path orbit-1" style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
-              <div className="orbit-dot orbit-dot-1" />
+        <div className="hero-visual" role="img" aria-label="Visualización de archivos, datos y APIs conectados mediante un proceso automatizado">
+          <div className="system-window">
+            <div className="system-topbar">
+              <div className="window-dots"><i /><i /><i /></div>
+              <span>AL / OPERATIONS ENGINE</span>
+              <small><i /> EN LÍNEA</small>
             </div>
-            <div className="orbit-path orbit-2" style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
-              <div className="orbit-dot orbit-dot-2" />
-            </div>
-
-            <div className="logo-core">
-              <span className="logo-text-3d">AL</span>
-            </div>
-          </div>
-
-          <div className="platform-base" />
-
-          {/* Floating tags */}
-          {[0, 1, 2, 3, 4].map(slot => {
-            const tag = heroTags[(highlightIndex + slot) % heroTags.length];
-            const active = visibleSlots.includes(slot);
-            return (
-              <div key={slot} className={`corner-tag tag-slot-${slot + 1} ${active ? "active" : ""}`}>
-                {tag.icon}
-                {tag.text}
+            <div className="system-body">
+              <div className="system-label">ENTRADAS</div>
+              <div className="source-row">
+                <div className="source-chip"><FileSpreadsheet size={17} /><span>Archivos</span></div>
+                <div className="source-chip"><Database size={17} /><span>Datos</span></div>
+                <div className="source-chip"><Braces size={17} /><span>APIs</span></div>
               </div>
-            );
-          })}
+              <div className="flow-line"><i /><i /><i /></div>
+              <div className="engine-card">
+                <div className="engine-icon"><Sparkles size={21} /></div>
+                <div><small>MOTOR AL</small><strong>Proceso automatizado</strong></div>
+                <span>ACTIVO</span>
+              </div>
+              <div className="output-grid">
+                <div className="metric-card">
+                  <small>Tareas procesadas</small>
+                  <strong>1.248</strong>
+                  <span>+18.4%</span>
+                </div>
+                <div className="chart-card" aria-hidden="true">
+                  {[42, 58, 50, 74, 68, 91, 82].map((height, i) => <i key={i} style={{ height: `${height}%` }} />)}
+                </div>
+              </div>
+              <div className="activity-row"><span><i /> Sincronización completada</span><small>ahora</small></div>
+            </div>
+          </div>
+          <div className="floating-note note-one"><span>01</span> Datos conectados</div>
+          <div className="floating-note note-two"><span>02</span> Decisiones claras</div>
         </div>
+      </div>
+      <div className="hero-proof">
+        <span className="proof-label">CAPACIDADES</span>
+        <div>React</div><i />
+        <div>Python</div><i />
+        <div>APIs</div><i />
+        <div>SQL</div><i />
+        <div>Inteligencia artificial</div>
       </div>
     </section>
   );
 }
-
-// ─── Services ────────────────────────────────────────────────────────────────

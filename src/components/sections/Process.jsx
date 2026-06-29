@@ -1,27 +1,30 @@
-import { Code2, Globe, Layout, LifeBuoy } from "lucide-react";
+import { Blocks, Compass, Rocket, ScanSearch } from "lucide-react";
 import { useFadeUp } from "../../hooks/useFadeUp";
 
 export default function Process() {
   const ref = useFadeUp();
   const steps = [
-    { n: "01", icon: <Globe size={22} />, title: "Descubrimiento", desc: "Entendemos tu negocio, objetivos y necesidades." },
-    { n: "02", icon: <Layout size={22} />, title: "Planificación", desc: "Definimos estrategia, funcionalidades y estructura." },
-    { n: "03", icon: <Code2 size={22} />, title: "Desarrollo", desc: "Creamos una solución moderna, eficiente y escalable." },
-    { n: "04", icon: <LifeBuoy size={22} />, title: "Entrega y Soporte", desc: "Lanzamos, medimos y seguimos mejorando." },
+    { n: "01", icon: <ScanSearch size={21} />, title: "Entender", desc: "Mapeamos el proceso, los usuarios y el costo real del problema." },
+    { n: "02", icon: <Compass size={21} />, title: "Diseñar", desc: "Definimos alcance, experiencia, arquitectura y una ruta de entregas." },
+    { n: "03", icon: <Blocks size={21} />, title: "Construir", desc: "Desarrollamos por etapas visibles, con validación y comunicación continua." },
+    { n: "04", icon: <Rocket size={21} />, title: "Evolucionar", desc: "Lanzamos, documentamos y mejoramos con base en el uso real." },
   ];
 
   return (
-    <section id="proceso" style={{ padding: "120px 0" }}>
+    <section id="proceso" className="process-section section-light">
       <div className="section-inner">
         <div ref={ref} className="fade-up">
-          <span className="section-eyebrow">Proceso</span>
-          <h2 className="section-title">Un proceso claro.<br />Resultados excepcionales.</h2>
+          <span className="section-eyebrow">Cómo trabajamos</span>
+          <div className="section-heading-row">
+            <h2 className="section-title">Menos incertidumbre. Más avances que puedes ver.</h2>
+            <p className="section-sub">No desaparecemos durante meses para volver con una sorpresa. El proyecto avanza mediante decisiones y entregas concretas.</p>
+          </div>
         </div>
         <div className="process-row">
           <div className="process-track" aria-hidden="true">
             {[0, 1, 2].map(i => (
               <span key={i} className="process-segment">
-                <span className="process-fill" style={{ "--segment-delay": `${0.75 + i * 2.1}s` }} />
+                <span className="process-fill" style={{ "--segment-delay": `${0.15 + i * 0.18}s` }} />
               </span>
             ))}
           </div>
@@ -30,7 +33,6 @@ export default function Process() {
               key={s.title}
               {...s}
               delay={i * 100}
-              stepDelay={i * 2.1}
             />
           ))}
         </div>
@@ -39,13 +41,13 @@ export default function Process() {
   );
 }
 
-function ProcessStep({ n, icon, title, desc, delay, stepDelay }) {
+function ProcessStep({ n, icon, title, desc, delay }) {
   const ref = useFadeUp();
   return (
     <div
       ref={ref}
       className="fade-up process-step"
-      style={{ transitionDelay: `${delay}ms`, "--step-delay": `${stepDelay}s` }}
+      style={{ transitionDelay: `${delay}ms` }}
     >
       <div className="process-num-wrap">{icon}</div>
       <div className="process-step-num">{n}</div>

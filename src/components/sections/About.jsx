@@ -1,80 +1,65 @@
-import { CheckCircle } from "lucide-react";
+import { ArrowUpRight, Award, BriefcaseBusiness, Check, GraduationCap, MapPin } from "lucide-react";
 import { useFadeUp } from "../../hooks/useFadeUp";
+import { CONTACT } from "../../config/contact";
 
 export default function About() {
   const ref = useFadeUp();
-  const points = [
-    "Sistemas internos y automatizaciones",
-    "Dashboards, reportería e integración de datos",
-    "Aplicaciones web operativas y mantenibles",
-    "IA aplicada y visión por computadora",
-    "Comunicación clara durante todo el proceso",
+  const experience = [
+    { area: "Desarrollo de software empresarial", role: "Sistemas full stack, APIs, bases de datos y aplicaciones internas", kind: "Experiencia profesional" },
+    { area: "Automatización y datos", role: "Reportería, procesos automáticos, SQL e integración de información", kind: "Proyectos aplicados" },
+    { area: "Desarrollo freelance", role: "Sistemas web, sitios corporativos, integraciones y soluciones a medida", kind: "Trabajo independiente" },
+  ];
+  const education = [
+    { degree: "Ingeniería en Software", institution: "Universidad Católica de Cuenca", period: "2021 — 2024" },
+    { degree: "Máster en Inteligencia Artificial", institution: "Universidad Internacional de La Rioja", period: "2025 — 2026" },
   ];
 
   return (
-    <section id="sobre" style={{ padding: "120px 0" }}>
+    <section id="sobre" className="about-section">
       <div className="section-inner">
         <div className="about-grid">
           <div ref={ref} className="fade-up">
-            <span className="section-eyebrow">Sobre AL</span>
-            <h2 className="section-title">Una marca de desarrollo enfocada en sistemas útiles, mantenibles y listos para crecer</h2>
-            <p style={{ color: "var(--gray)", fontSize: "0.95rem", lineHeight: 1.75, marginTop: "1rem", maxWidth: "480px" }}>
-              AL Soluciones Tecnológicas es una marca de desarrollo de software liderada por Alfredo Loaiza, enfocada en construir sistemas internos, automatizaciones y plataformas digitales a medida para negocios reales.
-            </p>
-            <ul className="about-points">
-              {points.map(p => (
-                <li key={p}><CheckCircle size={16} />{p}</li>
-              ))}
-            </ul>
+            <span className="section-eyebrow">El estudio</span>
+            <h2 className="section-title">Un estudio tecnológico cercano. Serio en la ejecución.</h2>
+            <p className="about-lead">AL Software Studio crea soluciones digitales con comunicación directa, criterio técnico y una metodología flexible que se adapta a las necesidades de cada proyecto.</p>
+            <div className="about-principles">
+              <span><Check size={15} /> Sin capas comerciales innecesarias</span>
+              <span><Check size={15} /> Equipo especializado por proyecto</span>
+              <span><Check size={15} /> Decisiones técnicas explicadas con claridad</span>
+            </div>
+            <a href={CONTACT.linkedin} target="_blank" rel="noreferrer" className="text-link">Conocer el perfil del fundador <ArrowUpRight size={16} /></a>
           </div>
-          <div className="about-visual">
-            <WaveVisual />
+          <div className="founder-card">
+            <div className="founder-header">
+              <div className="founder-monogram">AL</div>
+              <div><small>FUNDADOR / DIRECCIÓN TÉCNICA</small><h3>Alfredo Loaiza</h3><p>Ingeniero de Software · Máster en IA</p></div>
+            </div>
+            <div className="founder-meta">
+              <span><MapPin size={15} /> Loja, Ecuador</span>
+              <span><GraduationCap size={15} /> Formación en software e inteligencia artificial</span>
+            </div>
+            <div className="experience-list">
+              <div className="experience-title"><BriefcaseBusiness size={17} /> Experiencia profesional</div>
+              {experience.map(item => (
+                <div className="experience-item" key={item.area}>
+                  <i /><div><strong>{item.area}</strong><span>{item.role}</span></div><small>{item.kind}</small>
+                </div>
+              ))}
+            </div>
+            <div className="education-list">
+              <div className="experience-title"><Award size={17} /> Formación académica</div>
+              {education.map(item => (
+                <div className="education-item" key={item.degree}>
+                  <GraduationCap size={17} />
+                  <div><strong>{item.degree}</strong><span>{item.institution}</span></div>
+                  <small>{item.period}</small>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
     </section>
-  );
-}
-
-function WaveVisual() {
-  return (
-    <svg viewBox="0 0 440 380" className="wave-svg" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="wglow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="#0A84FF" stopOpacity="0.2" />
-          <stop offset="100%" stopColor="transparent" />
-        </radialGradient>
-      </defs>
-      <ellipse cx="220" cy="190" rx="200" ry="160" fill="url(#wglow)" />
-      {/* Wave lines */}
-      {[0,1,2,3,4,5].map(i => (
-        <path key={i}
-          d={`M ${30 + i*5} ${80 + i*10} Q ${110 + i*8} ${20 + i*6} ${220} ${100 + i*12} T ${410 - i*5} ${90 + i*10}`}
-          fill="none"
-          stroke={i % 2 === 0 ? "#0A84FF" : "#18D6FF"}
-          strokeWidth={i === 2 ? "2" : "1"}
-          opacity={0.15 + i * 0.06}
-        />
-      ))}
-      {/* Dot grid */}
-      {Array.from({ length: 8 * 7 }, (_, k) => {
-        const col = k % 8, row = Math.floor(k / 8);
-        const x = 60 + col * 48, y = 60 + row * 44;
-        return <circle key={k} cx={x} cy={y} r="1.5" fill="#18D6FF" opacity={Math.random() * 0.4 + 0.1} />;
-      })}
-      {/* Central glow circle */}
-      <circle cx="220" cy="190" r="70" fill="none" stroke="#0A84FF" strokeWidth="1" opacity="0.2" />
-      <circle cx="220" cy="190" r="110" fill="none" stroke="#18D6FF" strokeWidth="0.5" strokeDasharray="4 6" opacity="0.15" />
-      <circle cx="220" cy="190" r="20" fill="rgba(10,132,255,0.15)" />
-      <text x="220" y="196" textAnchor="middle" fontFamily="Sora, sans-serif" fontSize="14" fontWeight="800"
-        fill="url(#grad1)">AL</text>
-      <defs>
-        <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#0A84FF" />
-          <stop offset="100%" stopColor="#18D6FF" />
-        </linearGradient>
-      </defs>
-    </svg>
   );
 }
 

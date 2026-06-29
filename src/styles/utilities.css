@@ -1,18 +1,4 @@
-/* ── Divider ── */
-.section-divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--card-bd), transparent);
-  margin: 0 clamp(1.5rem, 5vw, 5rem);
-}
-
-/* ── Fade-in animations ── */
-.fade-up {
-  opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-
-.fade-up.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+.section-divider { display: none; }
+.fade-up { opacity: 0; transform: translateY(24px); transition: opacity .75s cubic-bezier(.2,.8,.2,1), transform .75s cubic-bezier(.2,.8,.2,1); }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) { .fade-up { opacity: 1; transform: none; } }
