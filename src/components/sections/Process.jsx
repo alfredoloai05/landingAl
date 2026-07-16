@@ -5,23 +5,27 @@ import { Cog, Sparkles } from "lucide-react";
 const steps = [
   {
     key: "discover", label: "Descubrir", signal: "FOCO", eyebrow: "MIRAR / ESCUCHAR",
+    destination: "un rumbo claro.",
     title: "Primero encontramos el nudo.",
     text: "Antes de hablar de funciones, entendemos dónde se pierde tiempo, qué confunde y qué vale la pena cambiar.",
   },
   {
     key: "define", label: "Definir", signal: "RUMBO", eyebrow: "ORDENAR / DECIDIR",
+    destination: "un plan compartido.",
     title: "Ponemos en orden lo que realmente importa.",
     text: "Definimos prioridades, alcance y decisiones clave para construir con una dirección compartida.",
   },
   {
     key: "build", label: "Construir", signal: "TRACCIÓN", eyebrow: "CREAR / PROBAR",
+    destination: "un sistema real.",
     title: "Lo volvemos real sin desaparecer por meses.",
     text: "Cada ciclo deja algo que puedes abrir, usar y comentar. El avance no se promete: se muestra.",
   },
   {
     key: "evolve", label: "Evolucionar", signal: "EVOLUCIÓN", eyebrow: "LANZAR / APRENDER",
-    title: "Lo lanzamos listo para aprender.",
-    text: "Miramos cómo se usa, corregimos la fricción y dejamos una base que puede cambiar sin empezar de cero.",
+    destination: "un negocio que crece.",
+    title: "Lo que lanzamos queda listo para crecer.",
+    text: "Después de salir, medimos, aprendemos y mejoramos. El sistema evoluciona contigo sin tener que reconstruirlo cada vez.",
   },
 ];
 
@@ -63,6 +67,7 @@ export default function Process() {
     });
     animate(".journey-counter small", { opacity: { from: 0 }, y: { from: 8 }, duration: 520, ease: "out(4)" });
     animate(".engine-gear svg", { scale: [0.9, 1], duration: 620, ease: "out(4)" });
+    animate(".journey-heading em", { opacity: { from: 0 }, y: { from: 14 }, duration: 620, ease: "out(4)" });
   }, [activeIndex]);
 
   return (
@@ -82,7 +87,7 @@ export default function Process() {
         <div className="section-shell journey-shell">
           <header className="journey-heading">
             <span className="section-label light">ASÍ SE MUEVE UN PROYECTO</span>
-            <h2>Del primer nudo a<br /><em>algo que ya funciona.</em></h2>
+            <h2>De una idea a<br /><em key={`destination-${active.key}`}>{active.destination}</em></h2>
             <span className="journey-scroll-hint"><i /> SIGUE BAJANDO</span>
           </header>
 

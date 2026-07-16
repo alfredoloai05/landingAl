@@ -39,7 +39,6 @@ export default function Services() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [cycleKey, setCycleKey] = useState(0);
   const copyRef = useRef(null);
-  const structureRef = useRef(null);
   const active = solutions[activeIndex];
   const ActiveIcon = active.icon;
 
@@ -55,10 +54,8 @@ export default function Services() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const content = copyRef.current?.querySelectorAll(":scope > *");
-    const route = structureRef.current?.querySelectorAll(".capability-route > *, .capability-outcomes > *");
     const animations = [
       content?.length && animate(content, { opacity: [0, 1], y: [20, 0], delay: stagger(55), duration: 560, ease: "out(4)" }),
-      route?.length && animate(route, { opacity: [0, 1], scale: [.9, 1], delay: stagger(70), duration: 480, ease: "out(4)" }),
     ].filter(Boolean);
     return () => animations.forEach(animation => animation.cancel?.());
   }, [activeIndex]);
@@ -68,10 +65,6 @@ export default function Services() {
     setCycleKey(key => key + 1);
   };
 
-  const travelStyle = activeIndex === solutions.length - 1
-    ? { left: "12.5%", width: "75%" }
-    : { left: `${12.5 + activeIndex * 25}%`, width: "25%" };
-
   return (
     <section className="solutions-experience section" id="servicios">
       <div className="section-shell">
@@ -80,49 +73,15 @@ export default function Services() {
             <span className="section-label">DONDE ENTRA VENCODEX</span>
             <h2>Cuatro formas de hacer que <em>el trabajo pese menos.</em></h2>
           </div>
-          <p><strong>AVANZA SOLA</strong><span>Mira el recorrido o elige una estación para empezar desde ahí.</span></p>
+          <p><strong>CAMBIA SOLA</strong><span>O elige una forma para verla a tu ritmo.</span></p>
         </header>
 
         <div className={`capability-sequence active-${active.key}`}>
-          <div className="sequence-selector" role="group" aria-label="Seleccionar una capacidad">
-            <span className="sequence-line" aria-hidden="true" />
-            <span
-              key={`travel-${activeIndex}-${cycleKey}`}
-              className={`sequence-travel ${activeIndex === solutions.length - 1 ? "wrap" : ""}`}
-              style={travelStyle}
-              aria-hidden="true"
-            />
-            {solutions.map((solution, index) => {
-              const Icon = solution.icon;
-              return (
-                <button
-                  type="button"
-                  key={solution.key}
-                  className={`sequence-option ${index === activeIndex ? "active" : ""}`}
-                  onClick={() => selectSolution(index)}
-                  aria-pressed={index === activeIndex}
-                  data-cursor="ELEGIR"
-                >
-                  <span className="sequence-index">0{index + 1}</span>
-                  <span className="sequence-node"><i /></span>
-                  <Icon />
-                  <strong>{solution.orbitLabel}</strong>
-                </button>
-              );
-            })}
-          </div>
-
           <div className="capability-open">
             <div className="capability-story" ref={copyRef}>
               <span className="capability-active"><ActiveIcon /> {active.label}</span>
               <h3>{active.title}</h3>
               <p>{active.description}</p>
-              <a href="#contacto" className="capability-link" data-cursor="HABLAR">Hablemos de lo que quieres crear <ArrowUpRight /></a>
-            </div>
-
-            <div className="capability-structure" ref={structureRef}>
-              <span className="capability-watermark" aria-hidden="true">{active.orbitLabel}</span>
-              <div className="capability-system-label"><i /> VENCODEX / {active.orbitLabel}</div>
               <div className="capability-outcomes">{active.outcomes.map(item => <span key={item}>{item}</span>)}</div>
               <div className="capability-route" aria-label="Flujo de la solución">
                 {active.stages.map((stage, index) => (
@@ -132,6 +91,33 @@ export default function Services() {
                     {index < active.stages.length - 1 && <ArrowRight />}
                   </div>
                 ))}
+              </div>
+              <a href="#contacto" className="capability-link" data-cursor="HABLAR">Hablemos de lo que quieres crear <ArrowUpRight /></a>
+            </div>
+
+            <div className="capability-choice-field" role="group" aria-label="Seleccionar una capacidad">
+              <span className="capability-watermark" aria-hidden="true">{active.orbitLabel}</span>
+              <div className="capability-system-label"><i /> VENCODEX / {active.orbitLabel}</div>
+              <div className="capability-choices">
+                {solutions.map((solution, index) => {
+                  const Icon = solution.icon;
+                  const selected = index === activeIndex;
+                  return (
+                    <button
+                      type="button"
+                      key={solution.key}
+                      className={`capability-choice ${selected ? "active" : ""}`}
+                      onClick={() => selectSolution(index)}
+                      aria-pressed={selected}
+                      data-cursor="ELEGIR"
+                    >
+                      <Icon />
+                      <span>{solution.label}</span>
+                      <i />
+                      {selected && <b key={`choice-progress-${activeIndex}-${cycleKey}`} aria-hidden="true" />}
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </div>
