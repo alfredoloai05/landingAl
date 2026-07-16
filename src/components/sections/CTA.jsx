@@ -7,7 +7,7 @@ export default function CTA() {
       <div className="section-shell contact-shell reveal">
         <span className="section-label light">PONGÁMOSLO EN MARCHA</span>
         <h2>Tienes una idea.<br /><em>Hagamos que funcione.</em></h2>
-        <p>Cuéntanos qué quieres lograr. Encontraremos la forma más clara de convertirlo en un producto real, útil y preparado para crecer.</p>
+        <p>No necesitas tener todo definido. Cuéntanos el problema, la idea o el proceso que quieres mejorar y te ayudaremos a ordenar los siguientes pasos.</p>
         <div className="contact-actions">
           <a className="button button-light" href={whatsappHref} target="_blank" rel="noreferrer" data-cursor="HABLAR"><MessageCircle size={18} /> Hablemos por WhatsApp <ArrowUpRight size={17} /></a>
           <a className="button button-outline" href={mailHref} data-cursor="ESCRIBIR"><Mail size={18} /> Enviar un correo</a>

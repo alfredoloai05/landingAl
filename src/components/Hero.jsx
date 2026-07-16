@@ -33,21 +33,21 @@ export default function Hero() {
       <div className="hero-grid" aria-hidden="true" />
       <div className="hero-shell">
         <div className="hero-copy">
-          <p className="hero-kicker"><span /> Estrategia · Diseño · Ingeniería</p>
-          <h1 className="hero-title" aria-label="Tu negocio sabe avanzar. Quitamos lo que lo frena.">
-            <span className="line"><span>Tu negocio sabe</span></span>
-            <span className="line"><span>avanzar. Quitamos</span></span>
-            <span className="line"><span><em>lo que lo frena.</em></span></span>
+          <p className="hero-kicker"><span /> Software a medida · Automatización · Inteligencia artificial</p>
+          <h1 className="hero-title" aria-label="Creamos software para que tu negocio avance.">
+            <span className="line"><span>Creamos software</span></span>
+            <span className="line"><span>para que tu negocio</span></span>
+            <span className="line"><span><em>avance.</em></span></span>
           </h1>
           <p className="hero-intro">
-            Vencodex convierte procesos confusos, tareas manuales e ideas sueltas en software que tu equipo entiende desde el primer clic.
+            Diseñamos y desarrollamos sistemas, automatizaciones y experiencias digitales para reducir tareas manuales, conectar información y hacer más simples los procesos de tu empresa.
           </p>
-          <div className="hero-actions">
+          <div className="hero-actions" data-nosnippet>
             <a href={whatsappHref} target="_blank" rel="noreferrer" className="button button-light" data-cursor="HABLAR">
-              ¿Tienes una idea? Cuéntanos <ArrowUpRight size={17} />
+              Cuéntanos qué necesitas resolver <ArrowUpRight size={17} />
             </a>
             <a href="#servicios" className="button button-ghost" data-cursor="EXPLORAR">
-              Ver cómo lo movemos <ArrowDown size={17} />
+              Ver nuestras soluciones <ArrowDown size={17} />
             </a>
           </div>
           <div className="hero-proof">

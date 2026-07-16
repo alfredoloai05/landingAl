@@ -6,26 +6,26 @@ const steps = [
   {
     key: "discover", label: "Descubrir", signal: "FOCO", eyebrow: "MIRAR / ESCUCHAR",
     destination: "un rumbo claro.",
-    title: "Primero encontramos el nudo.",
-    text: "Antes de hablar de funciones, entendemos dónde se pierde tiempo, qué confunde y qué vale la pena cambiar.",
+    title: "Encontramos dónde vale la pena intervenir.",
+    text: "Escuchamos cómo funciona hoy, qué está frenando el avance y qué conviene conservar antes de hablar de funciones.",
   },
   {
     key: "define", label: "Definir", signal: "RUMBO", eyebrow: "ORDENAR / DECIDIR",
     destination: "un plan compartido.",
-    title: "Ponemos en orden lo que realmente importa.",
-    text: "Definimos prioridades, alcance y decisiones clave para construir con una dirección compartida.",
+    title: "Convertimos el problema en decisiones concretas.",
+    text: "Definimos prioridades, alcance y criterios claros para que cada parte tenga una razón antes de construirla.",
   },
   {
     key: "build", label: "Construir", signal: "TRACCIÓN", eyebrow: "CREAR / PROBAR",
     destination: "un sistema real.",
-    title: "Lo volvemos real sin desaparecer por meses.",
-    text: "Cada ciclo deja algo que puedes abrir, usar y comentar. El avance no se promete: se muestra.",
+    title: "Construimos en ciclos que puedes revisar.",
+    text: "Cada ciclo entrega una parte funcional para probar, ajustar y continuar sin perder la dirección del proyecto.",
   },
   {
     key: "evolve", label: "Evolucionar", signal: "EVOLUCIÓN", eyebrow: "LANZAR / APRENDER",
     destination: "un negocio que crece.",
-    title: "Lo que lanzamos queda listo para crecer.",
-    text: "Después de salir, medimos, aprendemos y mejoramos. El sistema evoluciona contigo sin tener que reconstruirlo cada vez.",
+    title: "Mejoramos sobre lo que ya funciona.",
+    text: "Con el sistema en uso, incorporamos aprendizaje real y lo preparamos para nuevos procesos, usuarios y conexiones.",
   },
 ];
 
@@ -62,12 +62,16 @@ export default function Process() {
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    animate(".journey-word > *, .journey-copy > *", {
+    const section = sectionRef.current;
+    if (!section) return undefined;
+    const animations = [];
+    animations.push(animate(section.querySelectorAll(".journey-word > *, .journey-copy > *"), {
       y: { from: 30 }, delay: stagger(75), duration: 720, ease: "out(4)",
-    });
-    animate(".journey-counter small", { opacity: { from: 0 }, y: { from: 8 }, duration: 520, ease: "out(4)" });
-    animate(".engine-gear svg", { scale: [0.9, 1], duration: 620, ease: "out(4)" });
-    animate(".journey-heading em", { opacity: { from: 0 }, y: { from: 14 }, duration: 620, ease: "out(4)" });
+    }));
+    animations.push(animate(section.querySelectorAll(".journey-counter small"), { opacity: { from: 0 }, y: { from: 8 }, duration: 520, ease: "out(4)" }));
+    animations.push(animate(section.querySelectorAll(".engine-gear svg"), { scale: [0.9, 1], duration: 620, ease: "out(4)" }));
+    animations.push(animate(section.querySelectorAll(".journey-heading em"), { opacity: { from: 0 }, y: { from: 14 }, duration: 620, ease: "out(4)" }));
+    return () => animations.forEach(animation => animation?.cancel?.());
   }, [activeIndex]);
 
   return (
@@ -128,6 +132,26 @@ export default function Process() {
             <div className="journey-steps">
               {steps.map((step, index) => <span key={step.key} className={index === activeIndex ? "active" : index < activeIndex ? "passed" : ""}><i />{step.label}</span>)}
             </div>
+          </div>
+        </div>
+      </div>
+      <div className="journey-mobile">
+        <div className="journey-grid" aria-hidden="true" />
+        <div className="section-shell journey-mobile-shell">
+          <header className="journey-mobile-heading">
+            <span className="section-label light">ASÍ SE MUEVE UN PROYECTO</span>
+            <h2>De una idea a<br /><em>un sistema que avanza.</em></h2>
+          </header>
+          <div className="journey-mobile-steps">
+            {steps.map(step => (
+              <article className="journey-mobile-step" key={`mobile-${step.key}`}>
+                <div className="journey-mobile-signal"><Sparkles aria-hidden="true" /><span>{step.eyebrow}</span></div>
+                <strong>{step.label}</strong>
+                <small>{step.signal}</small>
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+              </article>
+            ))}
           </div>
         </div>
       </div>

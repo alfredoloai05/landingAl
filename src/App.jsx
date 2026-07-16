@@ -2,6 +2,7 @@ import './styles/index.css';
 import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
 import Services from './components/sections/Services.jsx';
+import Audience from './components/sections/Audience.jsx';
 import Process from './components/sections/Process.jsx';
 import CTA from './components/sections/CTA.jsx';
 import Footer from './components/Footer.jsx';
@@ -19,9 +20,10 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
+        <Services />
+        <Audience />
         <Process />
         <CTA />
-        <Services />
       </main>
       <Footer />
     </>

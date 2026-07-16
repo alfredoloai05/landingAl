@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { animate, stagger } from "animejs";
 import { ArrowRight, ArrowUpRight, Blocks, Bot, Cable, MonitorSmartphone } from "lucide-react";
 
-const CYCLE_DURATION = 5200;
+const CYCLE_DURATION = 8000;
 
 const solutions = [
   {
@@ -38,18 +38,44 @@ const solutions = [
 export default function Services() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [cycleKey, setCycleKey] = useState(0);
+  const [autoplayAllowed, setAutoplayAllowed] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const [pointerActive, setPointerActive] = useState(false);
+  const [pageVisible, setPageVisible] = useState(true);
+  const sectionRef = useRef(null);
   const copyRef = useRef(null);
   const active = solutions[activeIndex];
   const ActiveIcon = active.icon;
+  const paused = hovered || focused || pointerActive || !pageVisible;
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+    const desktop = window.matchMedia("(min-width: 768px)");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updateAutoplay = () => setAutoplayAllowed(desktop.matches && !reducedMotion.matches);
+    const updateVisibility = () => setPageVisible(document.visibilityState === "visible");
+
+    updateAutoplay();
+    updateVisibility();
+    desktop.addEventListener("change", updateAutoplay);
+    reducedMotion.addEventListener("change", updateAutoplay);
+    document.addEventListener("visibilitychange", updateVisibility);
+
+    return () => {
+      desktop.removeEventListener("change", updateAutoplay);
+      reducedMotion.removeEventListener("change", updateAutoplay);
+      document.removeEventListener("visibilitychange", updateVisibility);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!autoplayAllowed || paused) return undefined;
     const timer = window.setTimeout(() => {
       setActiveIndex(index => (index + 1) % solutions.length);
       setCycleKey(key => key + 1);
     }, CYCLE_DURATION);
     return () => window.clearTimeout(timer);
-  }, [activeIndex, cycleKey]);
+  }, [activeIndex, autoplayAllowed, cycleKey, paused]);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -66,7 +92,19 @@ export default function Services() {
   };
 
   return (
-    <section className="solutions-experience section" id="servicios">
+    <section
+      ref={sectionRef}
+      className={`solutions-experience section ${autoplayAllowed ? "has-autoplay" : "manual-only"} ${paused ? "is-paused" : ""}`}
+      id="servicios"
+      style={{ "--capability-duration": `${CYCLE_DURATION}ms` }}
+      onPointerEnter={event => event.pointerType === "mouse" && setHovered(true)}
+      onPointerLeave={() => { setHovered(false); setPointerActive(false); }}
+      onPointerDown={event => event.pointerType !== "mouse" && setPointerActive(true)}
+      onPointerUp={() => setPointerActive(false)}
+      onPointerCancel={() => setPointerActive(false)}
+      onFocusCapture={() => setFocused(true)}
+      onBlurCapture={event => !event.currentTarget.contains(event.relatedTarget) && setFocused(false)}
+    >
       <div className="section-shell">
         <header className="experience-heading reveal">
           <div>
@@ -113,7 +151,7 @@ export default function Services() {
                       <Icon />
                       <span>{solution.label}</span>
                       <i />
-                      {selected && <b key={`choice-progress-${activeIndex}-${cycleKey}`} aria-hidden="true" />}
+                      {selected && autoplayAllowed && <b key={`choice-progress-${activeIndex}-${cycleKey}`} aria-hidden="true" />}
                     </button>
                   );
                 })}
