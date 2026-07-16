@@ -1,60 +1,113 @@
-import { Blocks, Compass, Rocket, ScanSearch } from "lucide-react";
-import { useFadeUp } from "../../hooks/useFadeUp";
+import { useEffect, useRef, useState } from "react";
+import { animate, stagger } from "animejs";
+import { Compass, Radio, Sparkles } from "lucide-react";
+
+const steps = [
+  {
+    key: "discover", label: "Descubrir", signal: "FOCO", eyebrow: "MIRAR / ESCUCHAR",
+    title: "Primero encontramos el nudo.",
+    text: "Antes de hablar de funciones, entendemos dónde se pierde tiempo, qué confunde y qué vale la pena cambiar.",
+  },
+  {
+    key: "define", label: "Definir", signal: "RUMBO", eyebrow: "ORDENAR / DECIDIR",
+    title: "Ponemos en orden lo que realmente importa.",
+    text: "Definimos prioridades, alcance y decisiones clave para construir con una dirección compartida.",
+  },
+  {
+    key: "build", label: "Construir", signal: "TRACCIÓN", eyebrow: "CREAR / PROBAR",
+    title: "Lo volvemos real sin desaparecer por meses.",
+    text: "Cada ciclo deja algo que puedes abrir, usar y comentar. El avance no se promete: se muestra.",
+  },
+  {
+    key: "evolve", label: "Evolucionar", signal: "EVOLUCIÓN", eyebrow: "LANZAR / APRENDER",
+    title: "Lo lanzamos listo para aprender.",
+    text: "Miramos cómo se usa, corregimos la fricción y dejamos una base que puede cambiar sin empezar de cero.",
+  },
+];
 
 export default function Process() {
-  const ref = useFadeUp();
-  const steps = [
-    { n: "01", icon: <ScanSearch size={21} />, title: "Entender", desc: "Mapeamos el proceso, los usuarios y el costo real del problema." },
-    { n: "02", icon: <Compass size={21} />, title: "Diseñar", desc: "Definimos alcance, experiencia, arquitectura y una ruta de entregas." },
-    { n: "03", icon: <Blocks size={21} />, title: "Construir", desc: "Desarrollamos por etapas visibles, con validación y comunicación continua." },
-    { n: "04", icon: <Rocket size={21} />, title: "Evolucionar", desc: "Lanzamos, documentamos y mejoramos con base en el uso real." },
-  ];
+  const sectionRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const active = steps[activeIndex];
+
+  useEffect(() => {
+    let frame;
+    const update = () => {
+      const section = sectionRef.current;
+      if (!section) return;
+      const rect = section.getBoundingClientRect();
+      const distance = Math.max(1, section.offsetHeight - window.innerHeight);
+      const nextProgress = Math.max(0, Math.min(1, -rect.top / distance));
+      const nextIndex = Math.min(steps.length - 1, Math.floor(nextProgress * steps.length));
+      setProgress(nextProgress);
+      setActiveIndex(nextIndex);
+      frame = undefined;
+    };
+    const onScroll = () => { if (!frame) frame = window.requestAnimationFrame(update); };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    return () => {
+      if (frame) window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    animate(".journey-word > *, .journey-copy > *", {
+      y: { from: 30 }, delay: stagger(75), duration: 720, ease: "out(4)",
+    });
+    animate(".journey-signal > *", { scale: { from: .7 }, delay: stagger(70), duration: 620, ease: "out(4)" });
+  }, [activeIndex]);
 
   return (
-    <section id="proceso" className="process-section section-light">
-      <div className="section-inner">
-        <div ref={ref} className="fade-up">
-          <span className="section-eyebrow">Cómo trabajamos</span>
-          <div className="section-heading-row">
-            <h2 className="section-title">Menos incertidumbre. Más avances que puedes ver.</h2>
-            <p className="section-sub">No desaparecemos durante meses para volver con una sorpresa. El proyecto avanza mediante decisiones y entregas concretas.</p>
+    <section
+      ref={sectionRef}
+      className={`process-journey section step-${active.key}`}
+      id="proceso"
+      style={{ "--journey-progress": progress, "--journey-turn": `${progress * 1.35}turn`, "--journey-turn-reverse": `${progress * -1.35}turn` }}
+    >
+      <div className="journey-sticky">
+        <div className="journey-grid" aria-hidden="true" />
+        <div className="section-shell journey-shell">
+          <header className="journey-heading">
+            <span className="section-label light">ASÍ SE MUEVE UN PROYECTO</span>
+            <h2>Cada etapa deja<br /><em>algo que puedes probar.</em></h2>
+            <span className="journey-scroll-hint"><i /> SIGUE BAJANDO</span>
+          </header>
+
+          <div className="journey-stage" aria-live="polite">
+            <div className="journey-word" key={`word-${active.key}`}>
+              <small>{active.eyebrow}</small>
+              <strong>{active.label}</strong>
+              <span>{active.signal}</span>
+            </div>
+
+            <div className="journey-engine" aria-hidden="true">
+              <div className="journey-orbit orbit-a"><i /><i /></div>
+              <div className="journey-orbit orbit-b"><i /></div>
+              <div className="journey-signal" key={`signal-${active.key}`}><Radio /><span>{active.signal}</span></div>
+              <Compass className="journey-compass" />
+            </div>
+
+            <div className="journey-copy" key={`copy-${active.key}`}>
+              <Sparkles />
+              <h3>{active.title}</h3>
+              <p>{active.text}</p>
+            </div>
           </div>
-        </div>
-        <div className="process-row">
-          <div className="process-track" aria-hidden="true">
-            {[0, 1, 2].map(i => (
-              <span key={i} className="process-segment">
-                <span className="process-fill" style={{ "--segment-delay": `${0.15 + i * 0.18}s` }} />
-              </span>
-            ))}
+
+          <div className="journey-progress">
+            <div className="journey-progress-line"><i /></div>
+            <div className="journey-steps">
+              {steps.map((step, index) => <span key={step.key} className={index === activeIndex ? "active" : index < activeIndex ? "passed" : ""}><i />{step.label}</span>)}
+            </div>
           </div>
-          {steps.map((s, i) => (
-            <ProcessStep
-              key={s.title}
-              {...s}
-              delay={i * 100}
-            />
-          ))}
         </div>
       </div>
     </section>
   );
 }
-
-function ProcessStep({ n, icon, title, desc, delay }) {
-  const ref = useFadeUp();
-  return (
-    <div
-      ref={ref}
-      className="fade-up process-step"
-      style={{ transitionDelay: `${delay}ms` }}
-    >
-      <div className="process-num-wrap">{icon}</div>
-      <div className="process-step-num">{n}</div>
-      <div className="process-step-title">{title}</div>
-      <p className="process-step-desc">{desc}</p>
-    </div>
-  );
-}
-
-// ─── About ───────────────────────────────────────────────────────────────────

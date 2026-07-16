@@ -3,15 +3,16 @@ import { ArrowUpRight, Menu, X } from "lucide-react";
 import { NAV_ITEMS } from "../data/navigation";
 import { useActiveSection } from "../hooks/useActiveSection";
 
-const asset = (name) => `${import.meta.env.BASE_URL}assets/${name}`;
+const asset = name => `${import.meta.env.BASE_URL}assets/${name}`;
+const ACTIVE_ITEMS = [...NAV_ITEMS, { label: "Hablemos", href: "#contacto" }];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const active = useActiveSection(NAV_ITEMS);
+  const active = useActiveSection(ACTIVE_ITEMS);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 28);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -19,9 +20,7 @@ export default function Navbar() {
 
   useEffect(() => {
     document.body.classList.toggle("menu-open", open);
-    const onKeyDown = event => {
-      if (event.key === "Escape") setOpen(false);
-    };
+    const onKeyDown = event => event.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", onKeyDown);
     return () => {
       document.body.classList.remove("menu-open");
@@ -32,53 +31,27 @@ export default function Navbar() {
   return (
     <>
       <nav className={`navbar ${scrolled ? "is-scrolled" : ""}`} aria-label="Navegación principal">
-        <a className="brand-lockup" href="#inicio" aria-label="AL Software Studio, inicio">
-          <img src={asset("al-logo.svg")} alt="" />
-          <span className="brand-copy">
-            <strong>AL</strong>
-            <small>Software Studio</small>
-          </span>
+        <a className="brand" href="#inicio" aria-label="Vencodex, inicio" data-cursor="INICIO">
+          <img src={asset("vencodex-mark.svg")} alt="" />
+          <span><strong>VENCODEX</strong><small>SOFTWARE SOLUTIONS</small></span>
         </a>
-        <ul className="nav-links">
+        <div className="nav-center">
           {NAV_ITEMS.map(item => (
-            <li key={item.href}>
-              <a className={active === item.href ? "active" : ""} href={item.href} aria-current={active === item.href ? "page" : undefined}>
-                {item.label}
-              </a>
-            </li>
+            <a key={item.href} className={active === item.href ? "active" : ""} href={item.href} data-cursor="IR">{item.label}</a>
           ))}
-        </ul>
-        <a href="#contacto" className="btn-primary nav-cta">
-          Hablemos <ArrowUpRight size={15} />
-        </a>
-        <button
-          className="mobile-toggle"
-          onClick={() => setOpen(o => !o)}
-          aria-label={open ? "Cerrar menú" : "Abrir menú"}
-          aria-expanded={open}
-          aria-controls="mobile-navigation"
-        >
-          {open ? <X size={22} /> : <Menu size={22} />}
+        </div>
+        <a href="#contacto" className={`nav-contact ${active === "#contacto" ? "active" : ""}`} data-cursor="HABLAR">Hablemos <ArrowUpRight size={15} /></a>
+        <button className="menu-toggle" onClick={() => setOpen(value => !value)} aria-expanded={open} aria-controls="mobile-menu" aria-label={open ? "Cerrar menú" : "Abrir menú"}>
+          {open ? <X /> : <Menu />}
         </button>
       </nav>
-      <div id="mobile-navigation" className={`mobile-menu ${open ? "open" : ""}`} aria-hidden={!open}>
+      <div className={`mobile-menu ${open ? "open" : ""}`} id="mobile-menu" aria-hidden={!open}>
+        <span className="mobile-menu-label">NAVEGACIÓN</span>
         {NAV_ITEMS.map(item => (
-          <a
-            key={item.href}
-            className={active === item.href ? "active" : ""}
-            href={item.href}
-            aria-current={active === item.href ? "page" : undefined}
-            onClick={() => setOpen(false)}
-          >
-            {item.label}
-          </a>
+          <a key={item.href} href={item.href} onClick={() => setOpen(false)}>{item.label}</a>
         ))}
-        <a href="#contacto" className="btn-primary" onClick={() => setOpen(false)}>
-          Cuéntanos tu proyecto <ArrowUpRight size={16} />
-        </a>
+        <a className="mobile-contact" href="#contacto" onClick={() => setOpen(false)}>Iniciar un proyecto <ArrowUpRight /></a>
       </div>
     </>
   );
 }
-
-// ─── Hero ─────────────────────────────────────────────────────────────────────

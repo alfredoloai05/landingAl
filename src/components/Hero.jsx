@@ -1,79 +1,92 @@
-import { ArrowRight, Braces, Check, Database, FileSpreadsheet, Sparkles } from "lucide-react";
-import { useFadeUp } from "../hooks/useFadeUp";
+import { useEffect, useState } from "react";
+import { animate } from "animejs";
+import { ArrowDown, ArrowUpRight, Check } from "lucide-react";
 import { whatsappHref } from "../config/contact";
 
+const nodes = [
+  { label: "PRODUCTO", className: "node-web", readout: "Una idea que ya se puede usar" },
+  { label: "DATOS", className: "node-data", readout: "Información que sí responde" },
+  { label: "FLUJOS", className: "node-api", readout: "Menos pasos. Menos espera." },
+  { label: "ESCALA", className: "node-cloud", readout: "Crecer sin volver a empezar" },
+];
+
 export default function Hero() {
-  const ref = useFadeUp(0.05);
+  const [activeNode, setActiveNode] = useState(nodes[0]);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    animate(".stage-readout", { y: { from: 8 }, duration: 420, ease: "out(4)" });
+    animate(".core-mark", { scale: [0.92, 1], duration: 460, ease: "out(4)" });
+  }, [activeNode]);
 
   return (
     <section className="hero" id="inicio">
-      <div className="hero-orb hero-orb-one" />
-      <div className="hero-orb hero-orb-two" />
-      <div className="hero-grid">
-        <div ref={ref} className="fade-up hero-copy">
-          <span className="hero-eyebrow"><i /> Software studio · Ecuador / remoto</span>
-          <h1 className="hero-title">
-            Software que pone tu operación <span className="accent-underline">en movimiento.</span>
+      <div className="hero-grid" aria-hidden="true" />
+      <div className="hero-shell">
+        <div className="hero-copy">
+          <p className="hero-kicker"><span /> Estrategia · Diseño · Ingeniería</p>
+          <h1 className="hero-title" aria-label="Tu negocio sabe avanzar. Quitamos lo que lo frena.">
+            <span className="line"><span>Tu negocio sabe</span></span>
+            <span className="line"><span>avanzar. Quitamos</span></span>
+            <span className="line"><span><em>lo que lo frena.</em></span></span>
           </h1>
-          <p className="hero-sub">
-            Diseñamos sistemas a medida, automatizaciones e inteligencia artificial para convertir procesos dispersos en operaciones claras, conectadas y escalables.
+          <p className="hero-intro">
+            Vencodex convierte procesos confusos, tareas manuales e ideas sueltas en software que tu equipo entiende desde el primer clic.
           </p>
-          <div className="hero-btns">
-            <a href={whatsappHref} target="_blank" rel="noreferrer" className="btn-primary">
-              Cuéntanos tu proceso <ArrowRight size={17} />
+          <div className="hero-actions">
+            <a href={whatsappHref} target="_blank" rel="noreferrer" className="button button-light" data-cursor="HABLAR">
+              ¿Tienes una idea? Cuéntanos <ArrowUpRight size={17} />
+            </a>
+            <a href="#servicios" className="button button-ghost" data-cursor="EXPLORAR">
+              Ver cómo lo movemos <ArrowDown size={17} />
             </a>
           </div>
-          <div className="trust-row" aria-label="Nuestra forma de trabajar">
-            <span><Check size={14} /> Diagnóstico antes de construir</span>
-            <span><Check size={14} /> Entregas por etapas</span>
-            <span><Check size={14} /> Soporte directo</span>
+          <div className="hero-proof">
+            <span><Check size={14} /> Sin humo técnico</span>
+            <span><Check size={14} /> Avances que puedes probar</span>
+            <span><Check size={14} /> Decisiones bien explicadas</span>
           </div>
         </div>
 
-        <div className="hero-visual" role="img" aria-label="Visualización de archivos, datos y APIs conectados mediante un proceso automatizado">
-          <div className="system-window">
-            <div className="system-topbar">
-              <div className="window-dots"><i /><i /><i /></div>
-              <span>AL / OPERATIONS ENGINE</span>
-              <small><i /> EN LÍNEA</small>
+        <div className="hero-system" aria-label="Sistema visual que conecta producto, datos, flujos y escala" role="img">
+          <div className="system-stage">
+            <div className="stage-index">VX / FLOW SYSTEM</div>
+            <div className="stage-status"><i /> MOVEMENT ONLINE</div>
+            <svg className="system-lines" viewBox="0 0 600 600" aria-hidden="true">
+              <path className="signal-line" d="M88 170 C180 170 190 250 300 300" />
+              <path className="signal-line" d="M510 158 C420 158 420 252 300 300" />
+              <path className="signal-line" d="M94 454 C190 454 200 350 300 300" />
+              <path className="signal-line" d="M506 442 C410 442 400 350 300 300" />
+            </svg>
+            <div className="system-core">
+              <span className="core-pulse" />
+              <span className="core-ring ring-one"><i /><i /><i /></span>
+              <span className="core-ring ring-two"><i /><i /></span>
+              <div className="core-mark">
+                <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M13 13l19 38 19-38h-12l-7 16-7-16z" /><path d="M32 35l8 16h11L38 25z" /></svg>
+                <span>MOTION CORE</span>
+              </div>
             </div>
-            <div className="system-body">
-              <div className="system-label">ENTRADAS</div>
-              <div className="source-row">
-                <div className="source-chip"><FileSpreadsheet size={17} /><span>Archivos</span></div>
-                <div className="source-chip"><Database size={17} /><span>Datos</span></div>
-                <div className="source-chip"><Braces size={17} /><span>APIs</span></div>
-              </div>
-              <div className="flow-line"><i /><i /><i /></div>
-              <div className="engine-card">
-                <div className="engine-icon"><Sparkles size={21} /></div>
-                <div><small>MOTOR AL</small><strong>Proceso automatizado</strong></div>
-                <span>ACTIVO</span>
-              </div>
-              <div className="output-grid">
-                <div className="metric-card">
-                  <small>Tareas procesadas</small>
-                  <strong>1.248</strong>
-                  <span>+18.4%</span>
-                </div>
-                <div className="chart-card" aria-hidden="true">
-                  {[42, 58, 50, 74, 68, 91, 82].map((height, i) => <i key={i} style={{ height: `${height}%` }} />)}
-                </div>
-              </div>
-              <div className="activity-row"><span><i /> Sincronización completada</span><small>ahora</small></div>
-            </div>
+            {nodes.map(node => (
+              <button
+                type="button"
+                key={node.label}
+                className={`system-node ${node.className} ${activeNode.label === node.label ? "active" : ""}`}
+                onClick={() => setActiveNode(node)}
+                aria-pressed={activeNode.label === node.label}
+                data-cursor="CONECTAR"
+              ><i />{node.label}</button>
+            ))}
+            <div className="data-stream"><i className="data-particle" /><i className="data-particle" /><i className="data-particle" /></div>
+            <span className="stage-coordinate coord-one">FRICTION ↓ / MOMENTUM ↑</span>
+            <span className="stage-readout" key={activeNode.label}>{activeNode.readout}</span>
+            <span className="stage-hint">TOCA UN PUNTO</span>
           </div>
-          <div className="floating-note note-one"><span>01</span> Datos conectados</div>
-          <div className="floating-note note-two"><span>02</span> Decisiones claras</div>
         </div>
       </div>
-      <div className="hero-proof">
-        <span className="proof-label">CAPACIDADES</span>
-        <div>React</div><i />
-        <div>Python</div><i />
-        <div>APIs</div><i />
-        <div>SQL</div><i />
-        <div>Inteligencia artificial</div>
+      <div className="capability-bar">
+        <span>NUESTRO OFICIO</span>
+        <div className="capability-marquee"><div>Entender <i /> Diseñar <i /> Conectar <i /> Construir <i /> Simplificar <i /> Mejorar <i /> Entender <i /> Diseñar <i /> Conectar</div></div>
       </div>
     </section>
   );
