@@ -115,9 +115,11 @@ export function useMotion() {
     const stage = document.querySelector(".system-stage");
     const onPointerMove = event => {
       if (!stage || window.innerWidth < 900) return;
-      const x = (event.clientX / window.innerWidth - 0.5) * 10;
-      const y = (event.clientY / window.innerHeight - 0.5) * -8;
-      animate(stage, { rotateY: x, rotateX: y, duration: 900, ease: "out(3)" });
+      const x = (event.clientX / window.innerWidth - 0.5) * 18;
+      const y = (event.clientY / window.innerHeight - 0.5) * -13;
+      stage.style.setProperty("--pointer-x", `${x * 1.1}px`);
+      stage.style.setProperty("--pointer-y", `${y * -0.8}px`);
+      animate(stage, { rotateY: x, rotateX: y, duration: 780, ease: "out(3)" });
     };
     window.addEventListener("pointermove", onPointerMove, { passive: true });
 

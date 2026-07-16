@@ -11,13 +11,22 @@ const nodes = [
 ];
 
 export default function Hero() {
-  const [activeNode, setActiveNode] = useState(nodes[0]);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeNode = nodes[activeIndex];
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+    const cycle = window.setInterval(() => {
+      setActiveIndex(index => (index + 1) % nodes.length);
+    }, 1900);
+    return () => window.clearInterval(cycle);
+  }, []);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    animate(".stage-readout", { y: { from: 8 }, duration: 420, ease: "out(4)" });
-    animate(".core-mark", { scale: [0.92, 1], duration: 460, ease: "out(4)" });
-  }, [activeNode]);
+    animate(".system-stage .stage-readout", { opacity: { from: 0 }, y: { from: 9 }, duration: 520, ease: "out(4)" });
+    animate(".system-stage .core-mark", { scale: [0.92, 1], duration: 540, ease: "out(4)" });
+  }, [activeIndex]);
 
   return (
     <section className="hero" id="inicio">
@@ -48,15 +57,15 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="hero-system" aria-label="Sistema visual que conecta producto, datos, flujos y escala" role="img">
+        <div className="hero-system" aria-label="Sistema Vencodex que conecta producto, datos, flujos y escala automáticamente" role="img">
           <div className="system-stage">
             <div className="stage-index">VX / FLOW SYSTEM</div>
             <div className="stage-status"><i /> MOVEMENT ONLINE</div>
             <svg className="system-lines" viewBox="0 0 600 600" aria-hidden="true">
-              <path className="signal-line" d="M88 170 C180 170 190 250 300 300" />
-              <path className="signal-line" d="M510 158 C420 158 420 252 300 300" />
-              <path className="signal-line" d="M94 454 C190 454 200 350 300 300" />
-              <path className="signal-line" d="M506 442 C410 442 400 350 300 300" />
+              <path className={`signal-line ${activeIndex === 0 ? "active" : ""}`} d="M88 170 C180 170 190 250 300 300" />
+              <path className={`signal-line ${activeIndex === 1 ? "active" : ""}`} d="M510 158 C420 158 420 252 300 300" />
+              <path className={`signal-line ${activeIndex === 2 ? "active" : ""}`} d="M94 454 C190 454 200 350 300 300" />
+              <path className={`signal-line ${activeIndex === 3 ? "active" : ""}`} d="M506 442 C410 442 400 350 300 300" />
             </svg>
             <div className="system-core">
               <span className="core-pulse" />
@@ -68,19 +77,16 @@ export default function Hero() {
               </div>
             </div>
             {nodes.map(node => (
-              <button
-                type="button"
+              <div
                 key={node.label}
                 className={`system-node ${node.className} ${activeNode.label === node.label ? "active" : ""}`}
-                onClick={() => setActiveNode(node)}
-                aria-pressed={activeNode.label === node.label}
-                data-cursor="CONECTAR"
-              ><i />{node.label}</button>
+                aria-hidden="true"
+              ><i />{node.label}</div>
             ))}
             <div className="data-stream"><i className="data-particle" /><i className="data-particle" /><i className="data-particle" /></div>
             <span className="stage-coordinate coord-one">FRICTION ↓ / MOMENTUM ↑</span>
             <span className="stage-readout" key={activeNode.label}>{activeNode.readout}</span>
-            <span className="stage-hint">TOCA UN PUNTO</span>
+            <span className="stage-hint">SECUENCIA AUTOMÁTICA</span>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { animate, stagger } from "animejs";
-import { Compass, Radio, Sparkles } from "lucide-react";
+import { Cog, Sparkles } from "lucide-react";
 
 const steps = [
   {
@@ -30,6 +30,7 @@ export default function Process() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [progress, setProgress] = useState(0);
   const active = steps[activeIndex];
+  const percentage = Math.round(progress * 100);
 
   useEffect(() => {
     let frame;
@@ -60,7 +61,8 @@ export default function Process() {
     animate(".journey-word > *, .journey-copy > *", {
       y: { from: 30 }, delay: stagger(75), duration: 720, ease: "out(4)",
     });
-    animate(".journey-signal > *", { scale: { from: .7 }, delay: stagger(70), duration: 620, ease: "out(4)" });
+    animate(".journey-counter small", { opacity: { from: 0 }, y: { from: 8 }, duration: 520, ease: "out(4)" });
+    animate(".engine-gear svg", { scale: [0.9, 1], duration: 620, ease: "out(4)" });
   }, [activeIndex]);
 
   return (
@@ -68,14 +70,19 @@ export default function Process() {
       ref={sectionRef}
       className={`process-journey section step-${active.key}`}
       id="proceso"
-      style={{ "--journey-progress": progress, "--journey-turn": `${progress * 1.35}turn`, "--journey-turn-reverse": `${progress * -1.35}turn` }}
+      style={{
+        "--journey-progress": progress,
+        "--journey-angle": `${progress * 360}deg`,
+        "--journey-turn": `${progress * 2.15}turn`,
+        "--journey-turn-reverse": `${progress * -1.55}turn`,
+      }}
     >
       <div className="journey-sticky">
         <div className="journey-grid" aria-hidden="true" />
         <div className="section-shell journey-shell">
           <header className="journey-heading">
             <span className="section-label light">ASÍ SE MUEVE UN PROYECTO</span>
-            <h2>Cada etapa deja<br /><em>algo que puedes probar.</em></h2>
+            <h2>Del primer nudo a<br /><em>algo que ya funciona.</em></h2>
             <span className="journey-scroll-hint"><i /> SIGUE BAJANDO</span>
           </header>
 
@@ -87,10 +94,21 @@ export default function Process() {
             </div>
 
             <div className="journey-engine" aria-hidden="true">
-              <div className="journey-orbit orbit-a"><i /><i /></div>
-              <div className="journey-orbit orbit-b"><i /></div>
-              <div className="journey-signal" key={`signal-${active.key}`}><Radio /><span>{active.signal}</span></div>
-              <Compass className="journey-compass" />
+              <div className="engine-energy" />
+              <div className="engine-ticks" />
+              <div className="engine-progress-ring" />
+              <div className="engine-progress-head"><i /></div>
+              <div className="engine-gear gear-large"><Cog /></div>
+              <div className="engine-gear gear-small"><Cog /></div>
+              <div className="journey-counter">
+                <div><strong>{percentage}</strong><span>%</span></div>
+                <small key={`counter-${active.key}`}>{active.signal}</small>
+              </div>
+              <div className="engine-stage-lights">
+                {steps.map((step, index) => (
+                  <i key={step.key} className={index === activeIndex ? "active" : index < activeIndex ? "passed" : ""} />
+                ))}
+              </div>
             </div>
 
             <div className="journey-copy" key={`copy-${active.key}`}>
