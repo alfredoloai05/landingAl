@@ -73,7 +73,6 @@ export default function Services() {
             <span className="section-label">DONDE ENTRA VENCODEX</span>
             <h2>Cuatro formas de hacer que <em>el trabajo pese menos.</em></h2>
           </div>
-          <p><strong>CAMBIA SOLA</strong><span>O elige una forma para verla a tu ritmo.</span></p>
         </header>
 
         <div className={`capability-sequence active-${active.key}`}>
