@@ -50,7 +50,7 @@ export default function Audience() {
             const selected = activeIndex === index;
             const panelId = `audience-panel-${index}`;
             return (
-              <article className={`audience-scenario reveal ${selected ? "active" : ""}`} key={title}>
+              <article className={`audience-scenario ${selected ? "active" : ""}`} key={title}>
                 <button
                   type="button"
                   className="audience-trigger"
