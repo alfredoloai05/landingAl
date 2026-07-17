@@ -142,9 +142,40 @@ export default function Process() {
             <span className="section-label light">ASÍ SE MUEVE UN PROYECTO</span>
             <h2>De una idea a<br /><em>un sistema que avanza.</em></h2>
           </header>
+          <div className="journey-mobile-stage">
+            <div className="journey-mobile-wheel" aria-hidden="true">
+              <div className="mobile-wheel-energy" />
+              <div className="mobile-wheel-ticks" />
+              <div className="mobile-wheel-progress" />
+              <Cog className="mobile-wheel-gear" />
+              <div className="mobile-wheel-core"><strong>{percentage}</strong><span>%</span></div>
+              <div className="mobile-wheel-lights">
+                {steps.map((step, index) => <i key={`mobile-light-${step.key}`} className={index === activeIndex ? "active" : index < activeIndex ? "passed" : ""} />)}
+              </div>
+            </div>
+            <article className="journey-mobile-card" key={`mobile-active-${active.key}`} aria-live="polite">
+              <div className="journey-mobile-signal"><Sparkles aria-hidden="true" /><span>{active.eyebrow}</span></div>
+              <strong>{active.label}</strong>
+              <small>{active.signal}</small>
+              <h3>{active.title}</h3>
+              <p>{active.text}</p>
+            </article>
+          </div>
+          <div className="journey-mobile-indicator" aria-hidden="true">
+            {steps.map((step, index) => <span key={`mobile-indicator-${step.key}`} className={index === activeIndex ? "active" : index < activeIndex ? "passed" : ""}><i />{step.label}</span>)}
+          </div>
+        </div>
+      </div>
+      <div className="journey-static">
+        <div className="journey-grid" aria-hidden="true" />
+        <div className="section-shell journey-static-shell">
+          <header className="journey-static-heading">
+            <span className="section-label light">ASÍ SE MUEVE UN PROYECTO</span>
+            <h2>De una idea a<br /><em>un sistema que avanza.</em></h2>
+          </header>
           <div className="journey-mobile-steps">
             {steps.map(step => (
-              <article className="journey-mobile-step" key={`mobile-${step.key}`}>
+              <article className="journey-mobile-step" key={`static-${step.key}`}>
                 <div className="journey-mobile-signal"><Sparkles aria-hidden="true" /><span>{step.eyebrow}</span></div>
                 <strong>{step.label}</strong>
                 <small>{step.signal}</small>

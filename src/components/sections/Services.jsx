@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { animate, stagger } from "animejs";
-import { ArrowRight, ArrowUpRight, Blocks, Bot, Cable, MonitorSmartphone } from "lucide-react";
+import { ArrowRight, Blocks, Bot, Cable, MonitorSmartphone } from "lucide-react";
 
 const CYCLE_DURATION = 8000;
 
@@ -129,7 +129,6 @@ export default function Services() {
                   </div>
                 ))}
               </div>
-              <a href="#contacto" className="capability-link" data-cursor="HABLAR">Hablemos de lo que quieres crear <ArrowUpRight /></a>
             </div>
 
             <div className="capability-choice-field" role="group" aria-label="Seleccionar una capacidad">
@@ -151,7 +150,7 @@ export default function Services() {
                       <Icon />
                       <span>{solution.label}</span>
                       <i />
-                      {selected && autoplayAllowed && <b key={`choice-progress-${activeIndex}-${cycleKey}`} aria-hidden="true" />}
+                      {selected && <b className={autoplayAllowed ? "is-timed" : "is-static"} key={`choice-progress-${activeIndex}-${cycleKey}`} aria-hidden="true" />}
                     </button>
                   );
                 })}

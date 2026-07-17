@@ -77,7 +77,9 @@ export function useMotion() {
         entry.target.classList.add("is-visible");
         const isEditorialGroup = entry.target.matches(".experience-heading, .workflow-heading, .contact-shell");
         if (isEditorialGroup) {
-          const children = entry.target.querySelectorAll(":scope > *");
+          const children = entry.target.matches(".contact-shell")
+            ? entry.target.querySelectorAll(":scope > .contact-copy")
+            : entry.target.querySelectorAll(":scope > *");
           animate(children, {
             y: { from: 36 }, delay: stagger(90), duration: 900, ease: "out(4)",
           });

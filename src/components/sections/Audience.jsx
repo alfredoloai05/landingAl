@@ -1,4 +1,5 @@
-import { ArrowDownRight, Blocks, Cable, Clock3, Lightbulb } from "lucide-react";
+import { useState } from "react";
+import { ArrowDownRight, Blocks, Cable, ChevronDown, Clock3, Lightbulb } from "lucide-react";
 
 const scenarios = [
   {
@@ -32,6 +33,8 @@ const scenarios = [
 ];
 
 export default function Audience() {
+  const [activeIndex, setActiveIndex] = useState(null);
+
   return (
     <section className="audience section" id="para-quien">
       <div className="audience-grid" aria-hidden="true" />
@@ -43,16 +46,32 @@ export default function Audience() {
         </header>
 
         <div className="audience-scenarios">
-          {scenarios.map(({ icon: Icon, signal, title, situation, advance }) => (
-            <article className="audience-scenario reveal" key={title}>
-              <div className="audience-signal"><Icon aria-hidden="true" /><span>{signal}</span></div>
-              <div className="audience-copy">
-                <h3>{title}</h3>
-                <p>{situation}</p>
-              </div>
-              <p className="audience-advance"><ArrowDownRight aria-hidden="true" /> <span>{advance}</span></p>
-            </article>
-          ))}
+          {scenarios.map(({ icon: Icon, signal, title, situation, advance }, index) => {
+            const selected = activeIndex === index;
+            const panelId = `audience-panel-${index}`;
+            return (
+              <article className={`audience-scenario reveal ${selected ? "active" : ""}`} key={title}>
+                <button
+                  type="button"
+                  className="audience-trigger"
+                  aria-expanded={selected}
+                  aria-controls={panelId}
+                  onClick={() => setActiveIndex(selected ? null : index)}
+                  data-cursor={selected ? "CERRAR" : "ABRIR"}
+                >
+                  <span className="audience-signal"><Icon aria-hidden="true" /><small>{signal}</small></span>
+                  <strong>{title}</strong>
+                  <ChevronDown aria-hidden="true" />
+                </button>
+                <div className="audience-panel" id={panelId} aria-hidden={!selected}>
+                  <div className="audience-panel-inner">
+                    <p>{situation}</p>
+                    <p className="audience-advance"><ArrowDownRight aria-hidden="true" /> <span>{advance}</span></p>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>
