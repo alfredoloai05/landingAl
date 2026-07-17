@@ -1,4 +1,4 @@
-import { ArrowUpRight, Braces, Lightbulb, Mail, MessageCircle, Workflow } from "lucide-react";
+import { ArrowUpRight, Mail, MessageCircle } from "lucide-react";
 import { mailHref, whatsappHref } from "../../config/contact";
 
 export default function CTA() {
@@ -15,26 +15,17 @@ export default function CTA() {
           </div>
           <div className="contact-note"><i /> Una conversación directa · Sin formulario · Sin discurso de ventas</div>
         </div>
-        <div className="contact-signal" aria-hidden="true">
-          <svg viewBox="0 0 560 560">
-            <path d="M88 126 C174 126 181 244 280 280" />
-            <path d="M472 142 C390 142 384 248 280 280" />
-            <path d="M463 438 C382 438 376 329 280 280" />
-          </svg>
-          <span className="contact-orbit contact-orbit-one"><i /><i /><i /></span>
-          <span className="contact-orbit contact-orbit-two"><i /><i /></span>
-          <div className="contact-signal-core">
-            <MessageCircle />
-            <strong>VENCODEX</strong>
-            <small>LISTO PARA ESCUCHAR</small>
+        <div className="contact-kinetic" aria-hidden="true">
+          <div className="kinetic-coordinate"><span>VX / 07</span><span>IDEA → MOVIMIENTO</span></div>
+          <div className="kinetic-type">
+            <strong className="kinetic-word word-idea" data-word="IDEA">IDEA</strong>
+            <strong className="kinetic-word word-action" data-word="EN MARCHA">EN MARCHA</strong>
+            <span className="kinetic-scan"><i /></span>
           </div>
-          <span className="contact-signal-node contact-node-idea"><Lightbulb /> IDEA</span>
-          <span className="contact-signal-node contact-node-flow"><Workflow /> PROCESO</span>
-          <span className="contact-signal-node contact-node-code"><Braces /> SISTEMA</span>
-          <span className="contact-packet packet-one" />
-          <span className="contact-packet packet-two" />
-          <span className="contact-packet packet-three" />
-          <small className="contact-signal-status"><i /> CANAL ABIERTO</small>
+          <div className="kinetic-footer">
+            <span><i /> ESPACIO PARA EMPEZAR</span>
+            <b>CUÉNTANOS QUÉ TIENES EN MENTE</b>
+          </div>
         </div>
       </div>
     </section>
