@@ -563,9 +563,10 @@ h1, h2, h3, strong { font-family: var(--font-display); }
 .audience-scenario.active .audience-trigger > svg { color: var(--mint); transform: rotate(180deg); }
 .audience-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .42s cubic-bezier(.2,.8,.2,1); }
 .audience-scenario.active .audience-panel { grid-template-rows: 1fr; }
-.audience-panel-inner { min-height: 0; overflow: hidden; padding: 0 1.1rem; }
-.audience-panel-inner > p:first-child { max-width: 650px; margin: 0 0 1rem calc(40% + .55rem); color: var(--muted); font-size: .82rem; line-height: 1.65; }
-.audience-advance { display: grid; grid-template-columns: 21px 1fr; gap: .65rem; max-width: 650px; margin: 0 0 1.4rem calc(40% + .55rem); padding-top: 1rem; color: var(--navy); border-top: 1px solid rgba(36,88,244,.18); font-size: .76rem; font-weight: 600; line-height: 1.55; }
+.audience-panel-inner { min-height: 0; overflow: hidden; display: grid; grid-template-columns: minmax(0,.82fr) minmax(0,1.18fr); align-items: start; gap: clamp(1.5rem,3vw,3rem); padding: 0 1.1rem; }
+.audience-scenario.active .audience-panel-inner { padding-bottom: 1.4rem; }
+.audience-panel-inner > p:first-child { max-width: none; margin: 0; color: var(--muted); font-size: .82rem; line-height: 1.65; }
+.audience-advance { display: grid; grid-template-columns: 21px 1fr; gap: .65rem; max-width: none; margin: 0; padding-left: 1.2rem; color: var(--navy); border-left: 1px solid rgba(36,88,244,.18); font-size: .76rem; font-weight: 600; line-height: 1.55; }
 .audience-advance svg { width: 18px; color: var(--mint); stroke-width: 1.7; }
 
 @media (max-width: 980px) {
@@ -583,10 +584,11 @@ h1, h2, h3, strong { font-family: var(--font-display); }
   .audience-trigger { min-height: 92px; grid-template-columns: 25px minmax(0,1fr) 24px; gap: .7rem; padding: .8rem 0; }
   .audience-signal small { display: none; }
   .audience-trigger > strong { font-size: 1.45rem; }
-  .audience-panel-inner { padding: 0; }
+  .audience-panel-inner { display: block; padding: 0; }
+  .audience-scenario.active .audience-panel-inner { padding-bottom: 0; }
   .audience-panel-inner > p:first-child, .audience-advance { margin-left: 2.9rem; }
   .audience-panel-inner > p:first-child { font-size: .78rem; }
-  .audience-advance { margin-bottom: 1.2rem; font-size: .73rem; }
+  .audience-advance { margin-top: 1rem; margin-bottom: 1.2rem; padding-top: 1rem; padding-left: 0; border-top: 1px solid rgba(36,88,244,.18); border-left: 0; font-size: .73rem; }
 }
 
 @media (max-width: 767px) {
@@ -605,8 +607,8 @@ h1, h2, h3, strong { font-family: var(--font-display); }
 .process-journey { position: relative; height: 250svh; scroll-margin-top: 0; background: #11203a; }
 .journey-sticky { position: sticky; top: 0; height: 100svh; overflow: hidden; color: var(--white); background: radial-gradient(circle at 52% 52%,rgba(36,88,244,.22),transparent 30%),#11203a; }
 .journey-grid { position: absolute; inset: 0; opacity: .16; background-image: linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px); background-size: 68px 68px; mask-image: radial-gradient(circle at center,#000,transparent 76%); }
-.journey-shell { height: 100%; display: grid; grid-template-rows: auto 1fr auto; padding: 28px 0 26px; }
-.journey-heading { position: relative; z-index: 4; display: grid; grid-template-columns: .7fr 1.7fr .6fr; align-items: end; gap: 2rem; }
+.journey-shell { height: 100%; display: grid; grid-template-rows: auto 1fr auto; padding: 0 0 26px; }
+.journey-heading { position: relative; z-index: 4; display: grid; grid-template-columns: .7fr 1.7fr .6fr; align-items: start; gap: 2rem; padding-top: 82px; }
 .journey-heading h2 { font-size: clamp(2rem,3.4vw,3.75rem); font-weight: 500; line-height: 1; letter-spacing: -.055em; }
 .journey-heading h2 em { color: var(--mint); font-style: normal; }
 .journey-scroll-hint { justify-self: end; display: flex; align-items: center; gap: .55rem; color: rgba(255,255,255,.34); font-family: "Manrope",sans-serif; font-size: .43rem; font-weight: 800; letter-spacing: .14em; }
